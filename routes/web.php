@@ -20,6 +20,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckAdminLogin'], function 
 	});
 	Route::delete('/contract/{id}', 'ContractController@destroy');
 
+	// file
+	Route::get('/file', 'FileController@filesIndex');
+	Route::post('/file', 'FileController@store');
+	Route::post('/file/{id}', 'FileController@update');
+	Route::get('/file/{id}', 'FileController@show');
+	Route::get('/new/file', 'FileController@create');
+	Route::delete('/file/{id}', 'FileController@destroy');
+
 	// transaction
 	Route::delete('/transaction/{id}', 'TransactionController@destroy');
 

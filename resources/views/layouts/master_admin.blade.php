@@ -281,6 +281,22 @@
           @if(Auth::guard('admin')->user()->level == 1)
           <li class="active treeview">
             <a href="#">
+              <i class="fa fa-sitemap"></i> <span>Quản lý hồ sơ</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/admin/file"><i class="fa fa-user-circle"></i> Hồ sơ </a></li>
+            </ul>
+          </li>
+          @endif
+          @endif
+
+          @if(Auth::guard('admin')->check())
+          @if(Auth::guard('admin')->user()->level == 1)
+          <li class="active treeview">
+            <a href="#">
               <i class="fa fa-bar-chart"></i> <span>Báo cáo</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
