@@ -125,7 +125,7 @@ Delivered Transactions
         if (id != null && id != '') {
           $.ajax({
             type: "get",
-            url: "/admin/user/customer/" + id,
+            url: "/admin/account/" + id,
             data: {
               _token: $('[name="_token"]').val(),
             },

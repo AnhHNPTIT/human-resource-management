@@ -29,7 +29,7 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/admin/user/customer';
+    protected $redirectTo = '/admin/account';
 
     /**
      * Where to redirect users after login.

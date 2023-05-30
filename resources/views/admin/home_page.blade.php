@@ -265,42 +265,6 @@ Trang chủ
 	<!-- /.col -->
 </div>
 
-<!-- firebase 15/7/2019-->
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#config-web-app -->
-
-<script src="{{asset('firebase/fb.js')}}"></script>
-
-<script>
-	var database = firebase.database();
-
-	// get data
-	var lastIndexOne = 0;
-
-	var ref = firebase.database().ref('messages');
-
-	ref.on("value", function(snapshot) {
-		var value = snapshot.val();
-		var htmls = [];
-		$.each(value, function(index, value) {
-			if (value) {
-				htmls.push('<div class="item"><img src="/images/admins/' + value.avatar + '" class="offline"><p class="message"><a href="" class="name">' + value.name + '<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> ' + moment(value.created_at, "YYYY-M-D H:m:s").fromNow() + '</small></a>' + value.message + '</p></div>');
-			}
-			lastIndexOne = index;
-		});
-
-		$('.online-messages').html(htmls);
-
-		var objDiv = document.getElementById("chat-scroll");
-		objDiv.scrollTop = objDiv.scrollHeight;
-
-	}, function(error) {
-		console.log("Error: " + error.code);
-	});
-</script>
-
 <script>
 	$("#getMessage").keypress(function(e) {
 		var message = $('#getMessage').val().trim();

@@ -6,7 +6,6 @@
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Admin | Functional Food Store</title>
-  <link rel="shortcut icon" type="image" href="{{asset('/images/icons/logo-nha-thuoc-nhi-khoa.png')}}" />
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -35,14 +34,6 @@
   <link rel="stylesheet" href="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 
   <link rel="stylesheet" href="{{asset('/datatable_js/jquery.dataTables.min.css')}}">
-
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -254,6 +245,37 @@
         <ul class="sidebar-menu" data-widget="tree">
 
           <!-- <li class="header">MAIN NAVIGATION</li> -->
+          @if(Auth::guard('admin')->check())
+          @if(Auth::guard('admin')->user()->level == 1)
+          <li class="active treeview">
+            <a href="#">
+              <i class="fa fa-sitemap"></i> <span>Quản lý tài khoản</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/admin/account"><i class="fa fa-user-circle"></i> Người dùng </a></li>
+            </ul>
+          </li>
+          @endif
+          @endif
+
+          @if(Auth::guard('admin')->check())
+          @if(Auth::guard('admin')->user()->level == 1)
+          <li class="active treeview">
+            <a href="#">
+              <i class="fa fa-sitemap"></i> <span>Quản lý hợp đồng</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/admin/contract"><i class="fa fa-user-circle"></i> Hợp đồng lao động </a></li>
+            </ul>
+          </li>
+          @endif
+          @endif
 
           @if(Auth::guard('admin')->check())
           @if(Auth::guard('admin')->user()->level == 1)
@@ -328,23 +350,6 @@
               <li><a href="/admin/post"><i class="fa fa-newspaper-o"></i> Bài viết</a></li>
             </ul>
           </li>
-
-          @if(Auth::guard('admin')->check())
-          @if(Auth::guard('admin')->user()->level == 1)
-          <li class="active treeview">
-            <a href="#">
-              <i class="fa fa-sitemap"></i> <span>Quản lý người dùng</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="/admin/user/customer"><i class="fa fa-user-circle"></i> Khách hàng </a></li>
-              <li><a href="/admin/user/collaborator"><i class="fa fa-user-plus"></i> Nhân viên</a></li>
-            </ul>
-          </li>
-          @endif
-          @endif
 
         </ul>
       </section>
@@ -606,49 +611,6 @@
   <script src="{{asset('dist/js/demo.js')}}"></script>
 
   <script src="{{asset('/datatable_js/jquery.dataTables.min.js')}}"></script>
-
-
-  <!-- firebase 15/7/2019-->
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src=""></script>
-  <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#config-web-app -->
-
-  <script src="{{asset('firebase/fb.js')}}"></script>
-
-  <script>
-    var database = firebase.database();
-
-    // get data
-    var lastIndexTwo = 0;
-    var now = new Date();
-    var url = location.protocol + "//" + location.host;
-
-    var ref = firebase.database().ref('notifications');
-
-    ref.on("value", function(snapshot) {
-      var value = snapshot.val();
-      var htmls = [];
-      $.each(value, function(index, value) {
-        if (value) {
-          var ts = new Date(value.created_at);
-          if (ts.getFullYear() == now.getFullYear() && ts.getMonth() == now.getMonth() && ts.getDate() == now.getDate()) {
-            htmls.push('<li>' +
-              '<a href="' + url + value.path + '">' +
-              '<i class="fa fa-shopping-cart text-green"></i>' + value.content +
-              '</a>' +
-              '</li>');
-          }
-        }
-        lastIndexTwo = index;
-      });
-
-      $('#tbody').html(htmls.reverse());
-      $('.count-notifications').html(htmls.length);
-    }, function(error) {
-      console.log("Error: " + error.code);
-    });
-  </script>
 </body>
 
 </html>

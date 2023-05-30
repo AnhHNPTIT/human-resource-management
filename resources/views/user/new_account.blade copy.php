@@ -25,38 +25,16 @@ New Collaborator
 		<div class="col-xs-12">
 
 			<div class="box-header">
-				<h3 class="box-title">Tài khoản nhân viên</h3>
+				<h3 class="box-title">Tạo tài khoản</h3>
 			</div>
 			<!-- /.box-header -->
 			<div class="box-body">
 				@csrf
 				<div class="form-group">
-					<label for="" style="margin-top: 10px;">Tên nhân viên</label>
+					<label for="" style="margin-top: 10px;">Tên đăng nhập</label>
 					<input name="name" type="text" class="form-control" id="name" placeholder="Ví dụ : Phan Khánh Hưng"><br>
 
-					<label for="" style="margin-top: 10px;">Ảnh nhân viên</label>
-					<input name="image" type="file" class="form-control" id="getImage" placeholder="Image" onchange="readURL(this);"><br>
-					<div style="text-align : center; margin-top : 10px; margin-botom : 10px;">
-						<img id="thumbnail" src="#" alt=""/>
-					</div>
-					<script>
-						function readURL(input) {
-							if (input.files && input.files[0]) {
-								var reader = new FileReader();
-
-								reader.onload = function (e) {
-									$('#thumbnail')
-										.attr('src', e.target.result)
-										.width(150)
-										.height(200);
-								};
-
-								reader.readAsDataURL(input.files[0]);
-							}
-						}
-					</script>
-						
-					<label for="" style="margin-top: 10px;">Ngày sinh</label>
+					<label for="" style="margin-top: 10px;">Ngày ký hợp đồng</label>
 					<div class="input-group date">
 						<div class="input-group-addon">
 							<i class="fa fa-calendar"></i>
@@ -64,23 +42,21 @@ New Collaborator
 						<input type="text" class="form-control pull-right" id="datepicker">
 					</div>       
 
-					<label for="" style="margin-top: 30px;">Giới tính</label>
-					<select name="gender" class="form-control" id="gender">
-						<option value="0">Nữ</option>
-						<option value="1">Nam</option>
-					</select><br>
-						
-					<label for="" style="margin-top: 10px;">Số điện thoại</label>
-					<input name="phone_number" type="text" class="form-control" id="phone_number" placeholder="Ví dụ : 0982668926"><br>
+					<label for="" style="margin-top: 10px;">Ngày bắt đầu</label>
+					<div class="input-group date">
+						<div class="input-group-addon">
+							<i class="fa fa-calendar"></i>
+						</div>
+						<input type="text" class="form-control pull-right" id="datepicker">
+					</div> 
 
-					<label for="" style="margin-top: 10px;">Email</label>
-					<input name="email" type="text" class="form-control" id="email" placeholder="Ví dụ : hungpk@gmail.com"><br>
-
-					<label for="" style="margin-top: 10px;">Địa chỉ</label>
-					<input name="address" type="text" class="form-control" id="address" placeholder="Số 169 Trương Định - Hai Bà Trưng - Hà Nội"><br>
-
-					<label for="" style="margin-top: 10px;">Mật khẩu</label>
-					<input name="password" type="password" class="form-control" id="password" placeholder="Mật khẩu"><br>
+					<label for="" style="margin-top: 10px;">Ngày kết thúc</label>
+					<div class="input-group date">
+						<div class="input-group-addon">
+							<i class="fa fa-calendar"></i>
+						</div>
+						<input type="text" class="form-control pull-right" id="datepicker">
+					</div> 
 
 					<button type="button" class="btn btn-success btn-save" >Đăng ký</button>
 

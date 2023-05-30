@@ -10,6 +10,9 @@ use App\Product;
 use App\ProductCategory;
 use App\Manufacture;
 use App\Unit;
+
+use App\ChucVu;
+use App\LoaiHDLD;
 use View;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,6 +35,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         if (!\App::runningInConsole()) {
+            View::share('positions', ChucVu::all());
+            View::share('contract_types', LoaiHDLD::all());
+
+
             // chu de
             View::share('categories', PostCategory::orderBy('sort_id', 'asc')->get());
 
