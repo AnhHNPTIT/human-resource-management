@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.22, for Linux (x86_64)
 --
--- Host: localhost    Database: functional_food_store
+-- Host: localhost    Database: humanresource
 -- ------------------------------------------------------
 -- Server version	8.0.22
 

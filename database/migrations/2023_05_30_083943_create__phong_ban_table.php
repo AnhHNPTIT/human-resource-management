@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIntroductionsTable extends Migration
+class CreatePhongBanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateIntroductionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('introductions', function (Blueprint $table) {
+        Schema::create('PhongBan', function (Blueprint $table) {
             $table->increments('id');
-            $table->longText('content');
+            $table->string('tenPB')->nullable();
+            $table->string('soDT');
+            $table->string('diaChi');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateIntroductionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('introductions');
+        Schema::dropIfExists('PhongBan');
     }
 }
