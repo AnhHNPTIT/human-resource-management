@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ChiTietBangLuong;
-use App\TaiKhoan;
+use App\HoSoNV;
+use App\QTCongTac;
+use App\BangLuong;
 use Validator;
 
 class SalaryDetailController extends Controller
@@ -20,32 +22,77 @@ class SalaryDetailController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'maLHDLD' => 'required',
-                'maCV' => 'required',
-                'ngayKyHD' => 'required',
-                'ngayBD' => 'required',
-                'ngayKT' => 'required',
+                'maNV' => 'required',
+                'thang' => 'required',
+                'nam' => 'required',
+                'LCB' => 'required',
+                'LTC' => 'required',
+                'BHXH' => 'required',
+                'BHYT' => 'required',
+                'BHTN' => 'required',
+                'PC' => 'required',
+                'TTNCN' => 'required',
             ],
             [
-                'maLHDLD.required' => 'Loại Chi tiết bảng lương không được để trống',
-                'maCV.required' => 'Chức vụ không được để trống',
-                'ngayKyHD.required' => 'Ngày ký Chi tiết bảng lương không được để trống',
-                'ngayBD.required' => 'Ngày bắt đầu không được để trống',
-                'ngayKT.required' => 'Ngày kết thúc không được để trống',
+                'maNV.required' => 'Nhân viên không được để trống',
+                'thang.required' => 'Tháng không được để trống',
+                'nam.required' => 'Năm không được để trống',
+                'LCB.required' => 'Lương cơ bản không được để trống',
+                'LTC.required' => 'Lương tăng ca không được để trống',
+                'BHXH.required' => 'BHXH không được để trống',
+                'BHYT.required' => 'BHYT không được để trống',
+                'BHTN.required' => 'BHTN không được để trống',
+                'PC.required' => 'Phụ cấp không được để trống',
+                'TTNCN.required' => 'Thuế thu nhập cá nhân không được để trống',
             ]
         );
 
         if ($validator->fails()) {
             return response()->json(['is' => 'failed', 'error' => $validator->errors()->all()]);
         }
-
         $data = $request->all();
         unset($data['_token']);
+        $data['LTT'] = $data['LCB'] + $data['LTC'] + $data['PC'] - $data['BHXH'] - $data['BHYT'] - $data['BHTN'] - $data['TTNCN'];
+
+        $work = QTCongTac::where('maNV', $data['maNV'])
+            ->where('ngayDenCT', '<=', \Carbon\Carbon::today())
+            ->where('ngayChuyenCT', '>=', \Carbon\Carbon::today())->first();
+        
+        if ($work) {
+            $data['maPB'] = $work['maPB'];
+            // update report
+            $checkExist = BangLuong::where('maPB', $data['maPB'])->where('nam', $data['nam'])->where('thang', $data['thang'])->first();
+            if ($checkExist) {
+                BangLuong::find($checkExist->id)->update([
+                    'tongLCB' => $data['maPB'] + $checkExist['tongLCB'],
+                    'tongLTC' => $data['LTC'] + $checkExist['tongLTC'],
+                    'tongBHXH' => $data['BHXH'] + $checkExist['tongBHXH'],
+                    'tongBHYT' => $data['BHYT'] + $checkExist['tongBHYT'],
+                    'tongBHTN' => $data['BHTN'] + $checkExist['tongBHTN'],
+                    'tongPC' => $data['PC'] + $checkExist['tongPC'],
+                    'tongTTNCN' => $data['TTNCN'] + $checkExist['tongTTNCN'],
+                    'tongLTT' => $data['LTT'] + $checkExist['tongLTT']
+                ]);
+            } else {
+                BangLuong::create([
+                    'maPB' => $data['maPB'],
+                    'tongLCB' => $data['LCB'],
+                    'tongLTC' => $data['LTC'],
+                    'tongBHXH' => $data['BHXH'],
+                    'tongBHYT' => $data['BHYT'],
+                    'tongBHTN' => $data['BHTN'],
+                    'tongPC' => $data['PC'],
+                    'tongTTNCN' => $data['TTNCN'],
+                    'tongLTT' => $data['LTT'],
+                    'thang' => $data['thang'],
+                    'nam' => $data['nam'],
+                ]);
+            }
+        }
 
         $instance = ChiTietBangLuong::create($data);
-
         if (isset($instance)) {
-            return response()->json(['is' => 'success', 'complete' => 'Tạo Chi tiết bảng lương thành công']);
+            return response()->json(['is' => 'success', 'complete' => 'Tạo chi tiết bảng lương thành công']);
         }
         return response()->json(['is' => 'unsuccess', 'uncomplete' => 'Chi tiết bảng lương chưa được tạo thành công']);
     }
@@ -53,8 +100,9 @@ class SalaryDetailController extends Controller
 
     public function show($id)
     {
-        $contract =  ChiTietBangLuong::find($id);
-        return view('contract.contract_detail', ['contract' => $contract]);
+        $files = HoSoNV::all();
+        $salaryDetail = ChiTietBangLuong::find($id);
+        return view('salary_detail.salary_detail', ['files' => $files, 'salaryDetail' => $salaryDetail]);
     }
 
     public function destroy($id)
@@ -68,14 +116,41 @@ class SalaryDetailController extends Controller
 
     public function update(Request $request, $id)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'maNV' => 'required',
+                'thang' => 'required',
+                'nam' => 'required',
+                'LCB' => 'required',
+                'LTC' => 'required',
+                'BHXH' => 'required',
+                'BHYT' => 'required',
+                'BHTN' => 'required',
+                'PC' => 'required',
+                'TTNCN' => 'required',
+            ],
+            [
+                'maNV.required' => 'Nhân viên không được để trống',
+                'thang.required' => 'Tháng không được để trống',
+                'nam.required' => 'Năm không được để trống',
+                'LCB.required' => 'Lương cơ bản không được để trống',
+                'LTC.required' => 'Lương tăng ca không được để trống',
+                'BHXH.required' => 'BHXH không được để trống',
+                'BHYT.required' => 'BHYT không được để trống',
+                'BHTN.required' => 'BHTN không được để trống',
+                'PC.required' => 'Phụ cấp không được để trống',
+                'TTNCN.required' => 'Thuế thu nhập cá nhân không được để trống',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['is' => 'failed', 'error' => $validator->errors()->all()]);
+        }
         $data = $request->all();
-        $flag = ChiTietBangLuong::find($id)->update([
-            'maLHDLD' => $data['maLHDLD'],
-            'maCV' => $data['maCV'],
-            'ngayKyHD' => $data['ngayKyHD'],
-            'ngayBD' => $data['ngayBD'],
-            'ngayKT' => $data['ngayKT']
-        ]);
+        unset($data['_token']);
+        $data['LTT'] = $data['LCB'] + $data['LTC'] + $data['PC'] - $data['BHXH'] - $data['BHYT'] - $data['BHTN'] - $data['TTNCN'];
+        $flag = ChiTietBangLuong::find($id)->update($data);
         if ($flag) {
             return response()->json(['is' => 'success', 'complete' => 'Chi tiết bảng lương cập nhật thành công']);
         }
@@ -84,7 +159,7 @@ class SalaryDetailController extends Controller
 
     public function create()
     {
-        $accounts = TaiKhoan::all();
-        return view('salary_detail.new_salary', ['accounts' => $accounts]);
+        $files = HoSoNV::all();
+        return view('salary_detail.new_salary', ['files' => $files]);
     }
 }

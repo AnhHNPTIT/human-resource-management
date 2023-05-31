@@ -38,7 +38,7 @@ Contract detail
                     >
                     <select name="maLHDLD" class="form-control" id="maLHDLD">
                         @foreach ($contract_types as $value)
-                        <option value={{$value->id}} {{ $contract->maLHDLD==$value->id ? "selected" : "" }}>{{$value->tenLHDLD}}</option>
+                        <option value="{{$value->id}}" {{ $contract->maLHDLD==$value->id ? "selected" : "" }}>{{$value->tenLHDLD}}</option>
                         @endforeach
                     </select><br />
 
@@ -47,7 +47,7 @@ Contract detail
                     >
                     <select name="maCV" class="form-control" id="maCV">
                         @foreach ($positions as $value)
-                        <option value={{$value->id}} {{ $contract->maCV==$value->id ? "selected" : "" }} >{{$value->chucVu}}</option>
+                        <option value="{{$value->id}}" {{ $contract->maCV==$value->id ? "selected" : "" }} >{{$value->chucVu}}</option>
                         @endforeach
                     </select><br />
 
@@ -188,7 +188,7 @@ Contract detail
                         .append("<li>" + response.uncomplete + "</li>");
                 }
                 window.scroll({
-                    top: 100,
+                    top: 0,
                     behavior: "smooth",
                 });
             },

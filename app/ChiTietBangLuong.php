@@ -8,8 +8,10 @@ class ChiTietBangLuong extends Model
 {
     protected $table = 'ChiTietBangLuong';
     protected $fillable = [
+        'thang',
+        'nam',
         'maNV',
-        'maBL',
+        'maPB',
         'LCB',
         'LTC',
         'BHXH',
@@ -20,4 +22,14 @@ class ChiTietBangLuong extends Model
         'LTT',
         'ghiChu',
     ];
+
+    public function account()
+    {
+        return $this->hasOne('App\HoSoNV', 'id', 'maNV');
+    }
+
+    public function department()
+    {
+        return $this->hasOne('App\PhongBan', 'id', 'maPB');
+    }
 }

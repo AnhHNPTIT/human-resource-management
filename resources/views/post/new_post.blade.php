@@ -147,7 +147,7 @@ New Post
 						});
 
 						window.scroll({
-							top: 100,
+							top: 0,
 							behavior: 'smooth'
 						});
 					}
@@ -160,7 +160,7 @@ New Post
 						$(".success-msg").find("ul").append('<li>'+response.complete+'</li>');
 
 						window.scroll({
-							top: 100,
+							top: 0,
 							behavior: 'smooth'
 						});
 					}
@@ -173,7 +173,7 @@ New Post
 						$(".unsuccess-msg").find("ul").append('<li>'+response.uncomplete+'</li>');
 
 						window.scroll({
-							top: 100,
+							top: 0,
 							behavior: 'smooth'
 						});
 					}

@@ -65,7 +65,7 @@
 					</div>       
 
                     <div style="margin-top: 20px">
-                        <a href="/admin/file" class="btn btn-danger"
+                        <a href="/admin/work" class="btn btn-danger"
                             >Hủy bỏ</a
                         >
                         <button

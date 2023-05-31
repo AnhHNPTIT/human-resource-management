@@ -1,5 +1,5 @@
-@extends('layouts.master_admin') @section('controll') New salary detail @endsection
-@section('content')
+@extends('layouts.master_admin') @section('controll') New salary detail
+@endsection @section('content')
 
 <div class="container box box-body pad">
     <div class="row">
@@ -28,66 +28,60 @@
             <div class="box-body">
                 @csrf
                 <div class="form-group">
-                    <label for="maNV" style="margin-top: 10px">Mã nhân viên</label>
+                    <label for="maNV" style="margin-top: 10px">Nhân viên</label>
                     <select name="maNV" class="form-control" id="maNV">
-                        <option value="">-----------Chọn nhân viên-----------</option>
-                        @foreach ($accounts as $value)
-                        <option value={{$value->id}}>Mã NV {{$value->id}} - {{$value->tenDN}}</option>
-                        @endforeach
-                    </select><br />
+                        @foreach ($files as $value)
+                        <option value="{{$value->id}}">
+                            {{$value->hoTen}}
+                        </option>
+                        @endforeach</select
+                    ><br />
 
-                    <!-- <label for="maCV"
-                        >Chức vụ</label
+                    <label for="thang">Tháng (Lương của tháng nào)</label>
+                    <input type="text" class="form-control" id="thang" />
+
+                    <label for="nam" style="margin-top: 10px">Năm (Lương theo năm nào)</label>
+                    <input type="text" class="form-control" id="nam" />
+
+                    <label for="LCB">Lương cơ bản</label>
+                    <input type="text" class="form-control" id="LCB" />
+
+                    <label for="LTC" style="margin-top: 10px"
+                        >Lương tăng ca</label
                     >
-                    <select name="maCV" class="form-control" id="maCV">
-                        @foreach ($positions as $value)
-                        <option value={{$value->id}}>{{$value->chucVu}}</option>
-                        @endforeach
-                    </select><br /> -->
+                    <input type="text" class="form-control" id="LTC" />
 
-                    <label for="ngayKyHD">Ngày ký hợp đồng</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        <input
-                            type="text"
-                            class="form-control pull-right"
-                            id="ngayKyHD"
-                        />
-                    </div>
+                    <label for="BHXH" style="margin-top: 10px">BHXH</label>
+                    <input type="text" class="form-control" id="BHXH" />
 
-                    <label for="ngayBD" style="margin-top: 10px">Ngày bắt đầu</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        <input
-                            type="text"
-                            class="form-control pull-right"
-                            id="ngayBD"
-                        />
-                    </div>
+                    <label for="BHYT" style="margin-top: 10px">BHYT</label>
+                    <input type="text" class="form-control" id="BHYT" />
 
-                    <label for="ngayKT" style="margin-top: 10px">Ngày kết thúc</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        <input
-                            type="text"
-                            class="form-control pull-right"
-                            id="ngayKT"
-                        />
-                    </div>
+                    <label for="BHTN" style="margin-top: 10px">BHTN</label>
+                    <input type="text" class="form-control" id="BHTN" />
+
+                    <label for="PC" style="margin-top: 10px">Phụ cấp</label>
+                    <input type="text" class="form-control" id="PC" />
+
+                    <label for="TTNCN" style="margin-top: 10px"
+                        >Thuế TNCN</label
+                    >
+                    <input type="text" class="form-control" id="TTNCN" />
+
+                    <label for="ghiChu" style="margin-top: 10px"
+                        >Ghi chú</label
+                    >
+                   <div>
+                    <textarea name="ghiChu" id="ghiChu" rows="5" class="form-control"></textarea>
+                   </div>
 
                     <div style="margin-top: 20px">
-                        <a href="/admin/contract" class="btn btn-danger"
+                        <a href="/admin/salary/detail" class="btn btn-danger"
                             >Hủy bỏ</a
                         >
                         <button
                             type="button"
-                            class="btn btn-success btn-create-contract"
+                            class="btn btn-success btn-create-salary"
                         >
                             Tạo
                         </button>
@@ -99,49 +93,24 @@
 </div>
 
 <script type="text/javascript">
-    $(function () {
-        //Date picker
-        $("#ngayKyHD").datepicker({
-            autoclose: true,
-        });
-        $("#ngayBD").datepicker({
-            autoclose: true,
-        });
-        $("#ngayKT").datepicker({
-            autoclose: true,
-        });
-    });
-</script>
-
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"
-    integrity="sha512-CryKbMe7sjSCDPl18jtJI5DR5jtkUWxPXWaLCst6QjH8wxDexfRJic2WRmRXmstr2Y8SxDDWuBO6CQC6IE4KTA=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-></script>
-
-<script type="text/javascript">
-    function formatDateTime(time) {
-        if (time) {
-            return moment(time).format("YYYY-MM-DD");
-        }
-        return null;
-    }
-    $(".btn-create-contract").click(function () {
+    $(".btn-create-salary").click(function () {
         var form_data = new FormData();
-        var ngayKyHD = $("#ngayKyHD").val();
-        var ngayBD = $("#ngayBD").val();
-        var ngayKT = $("#ngayKT").val();
         form_data.append("_token", "{{csrf_token()}}");
-        form_data.append("maLHDLD", $("#maLHDLD").val());
-        form_data.append("maCV", $("#maCV").val());
-        form_data.append("ngayKyHD", formatDateTime(ngayKyHD));
-        form_data.append("ngayBD", formatDateTime(ngayBD));
-        form_data.append("ngayKT", formatDateTime(ngayKT));
+        form_data.append("maNV", $("#maNV").val());
+        form_data.append("thang", $("#thang").val());
+        form_data.append("nam", $("#nam").val());
+        form_data.append("LCB", $("#LCB").val());
+        form_data.append("LTC", $("#LTC").val());
+        form_data.append("BHXH", $("#BHXH").val());
+        form_data.append("BHYT", $("#BHYT").val());
+        form_data.append("BHTN", $("#BHTN").val());
+        form_data.append("PC", $("#PC").val());
+        form_data.append("TTNCN", $("#TTNCN").val());
+        form_data.append("ghiChu", $("#ghiChu").val());
 
         $.ajax({
             type: "post",
-            url: "/admin/contract",
+            url: "/admin/salary/detail",
             data: form_data,
             dataType: "json",
             contentType: false,
@@ -177,7 +146,7 @@
                         .append("<li>" + response.uncomplete + "</li>");
                 }
                 window.scroll({
-                    top: 100,
+                    top: 0,
                     behavior: "smooth",
                 });
             },

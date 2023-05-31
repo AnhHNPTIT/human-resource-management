@@ -8,8 +8,9 @@ class BangLuong extends Model
 {   
     protected $table = 'BangLuong';
     protected $fillable = [
-        'maBP',
-        'thoiGian',
+        'maPB',
+        'thang',
+        'nam',
         'tongLCB',
         'tongLTC',
         'tongBHXH',

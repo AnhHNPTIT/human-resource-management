@@ -68,7 +68,7 @@ New Category
 							});
 
 							window.scroll({
-								top: 100,
+								top: 0,
 								behavior: 'smooth'
 							});
 						}
@@ -81,7 +81,7 @@ New Category
 							$(".success-msg").find("ul").append('<li>'+response.complete+'</li>');
 
 							window.scroll({
-								top: 100,
+								top: 0,
 								behavior: 'smooth'
 							});
 						}
@@ -94,7 +94,7 @@ New Category
 							$(".unsuccess-msg").find("ul").append('<li>'+response.uncomplete+'</li>');
 
 							window.scroll({
-								top: 100,
+								top: 0,
 								behavior: 'smooth'
 							});
 						}

@@ -260,7 +260,7 @@ New Product
 						});
 
 						window.scroll({
-							top: 100,
+							top: 0,
 							behavior: 'smooth'
 						});
 					}
@@ -273,7 +273,7 @@ New Product
 						$(".success-msg").find("ul").append('<li>'+response.complete+'</li>');
 
 						window.scroll({
-							top: 100,
+							top: 0,
 							behavior: 'smooth'
 						});
 					}
@@ -286,7 +286,7 @@ New Product
 						$(".unsuccess-msg").find("ul").append('<li>'+response.uncomplete+'</li>');
 
 						window.scroll({
-							top: 100,
+							top: 0,
 							behavior: 'smooth'
 						});
 					}

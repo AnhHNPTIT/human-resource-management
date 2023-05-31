@@ -1,4 +1,4 @@
-@extends('layouts.master_admin') @section('controll') contracts List @endsection
+@extends('layouts.master_admin') @section('controll') Salary details @endsection
 @section('content')
 <!-- Main content -->
 <section class="content">
@@ -6,7 +6,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Danh sách chi tiết lương</h3>
+                    <h3 class="box-title">Chi tiết bảng lương</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -16,51 +16,66 @@
                             href="/admin/new/salary/detail"
                             data-toggle="modal"
                             class="btn btn-info btn-add"
-                            >Thêm chi tiết lương</a
+                            >Thêm bảng lương</a
                         >
                     </div>
                     <table
-                        id="list-contracts"
+                        id="list-salary-details"
                         class="table table-bordered table-striped"
                         style="margin-top: 10px"
                     >
                         <thead>
                             <tr>
-                                <th class="col-sm-2 text-center">
-                                    Loại hợp đồng
-                                </th>
-                                <th class="col-sm-2 text-center">
-                                    Vị trí
-                                </th>
-                                <th class="col-sm-2 text-center">Ngày ký</th>
-                                <th class="col-sm-2 text-center">Ngày bắt đầu</th>
-                                <th class="col-sm-2 text-center">Ngày kết thúc</th>
-                                <th class="col-sm-2 text-center">Hành động</th>
+                                <th class="col-sm-1 text-center">Nhân viên</th>
+                                <th class="col-sm-1 text-center">Lương cơ bản</th>
+                                <th class="col-sm-1 text-center">Lương tăng ca</th>
+                                <th class="col-sm-1 text-center">BHXH</th>
+                                <th class="col-sm-1 text-center">BHYT</th>
+                                <th class="col-sm-1 text-center">BHTN</th>
+                                <th class="col-sm-1 text-center">Phụ cấp</th>
+                                <th class="col-sm-1 text-center">Thuế TNCN</th>
+                                <th class="col-sm-1 text-center">Lương thực tế</th>
+                                <th class="col-sm-1 text-center">Ghi chú</th>
+                                <th class="col-sm-1 text-center">Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @php Carbon\Carbon::setLocale('vi'); @endphp
                             @foreach ($salaryDetails as $value)
                             <tr>
-                                <td class="col-sm-2 text-center">
-                                    
+                                <td class="col-sm-1 text-center">
+                                    <p>{{$value->account->hoTen}}</p>
+                                    <p style="font-weight: 600;">(Lương: T{{$value->thang}} - {{$value->nam}})</p>
                                 </td>
-                                <td class="col-sm-2 text-center">
-                                    
+                                <td class="col-sm-1 text-center">
+                                    {{number_format($value->LCB * 1000)}} VND
                                 </td>
-                                <td class="col-sm-2 text-center">
-                                    {{$value->ngayKyHD}}
+                                <td class="col-sm-1 text-center">
+                                    {{number_format($value->LTC * 1000)}} VND
                                 </td>
-                                <td class="col-sm-2 text-center">
-                                    {{$value->ngayBD}}
+                                <td class="col-sm-1 text-center">
+                                    {{number_format($value->BHXH * 1000)}} VND
                                 </td>
-                                <td class="col-sm-2 text-center">
-                                    {{$value->ngayKT}}
+                                <td class="col-sm-1 text-center">
+                                    {{number_format($value->BHYT * 1000)}} VND
                                 </td>
-
-                                <td class="col-sm-2 text-center">
+                                <td class="col-sm-1 text-center">
+                                    {{number_format($value->BHTN * 1000)}} VND
+                                </td>
+                                <td class="col-sm-1 text-center">
+                                    {{number_format($value->PC * 1000)}} VND
+                                </td>
+                                <td class="col-sm-1 text-center">
+                                    {{number_format($value->TTNCN * 1000)}} VND
+                                </td>
+                                <td class="col-sm-1 text-center">
+                                    {{number_format($value->LTT * 1000)}} VND
+                                </td>
+                                <td class="col-sm-1 text-center">
+                                    {{$value->ghiChu}}
+                                </td>
+                                <td class="col-sm-1 text-center">
                                     <a
-                                        href="/admin/contract/{{$value->id}}"
+                                        href="/admin/salary/detail/{{$value->id}}"
                                         type="button"
                                         class="btn btn-warning btn-edit"
                                     >
@@ -70,7 +85,7 @@
                                         data-id="{{$value->id}}"
                                         type="button"
                                         title="Xóa"
-                                        class="btn btn-danger btn-delete-contract"
+                                        class="btn btn-danger btn-delete-salary-detail"
                                     >
                                         <i class="fa fa-user-times"></i>
                                     </button>
@@ -80,7 +95,7 @@
                         </tbody>
                     </table>
 
-                    {{-- {{$contracts->links()}} --}}
+                    {{-- {{$salary-details->links( * 1000)}} --}}
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -92,7 +107,7 @@
 
     <script>
         $(document).ready(function () {
-            $("#list-contracts").DataTable({
+            $("#list-salary-details").DataTable({
                 lengthMenu: [
                     [25, 50, 100, 500, 1000, 5000, -1],
                     [25, 50, 100, 500, 1000, 5000, "All"],
@@ -108,7 +123,7 @@
             var id = $(this).attr("data-id");
             $.ajax({
                 type: "put",
-                url: "/admin/contract/" + id,
+                url: "/admin/salary/detail/" + id,
                 data: {
                     _token: $('[name="_token"]').val(),
                     id: id,
@@ -125,7 +140,7 @@
                         });
 
                         setTimeout(function () {
-                            window.location.href = "/admin/contract/";
+                            window.location.href = "/admin/salary/detail/";
                         }, 1000);
                     }
                     if (response.is === "unsuccess") {
@@ -143,13 +158,13 @@
         });
 
         // delete
-        $(".btn-delete-contract").click(function () {
+        $(".btn-delete-salary-detail").click(function () {
             if (confirm("Bạn có muốn xóa không?")) {
                 var _this = $(this);
                 var id = $(this).attr("data-id");
                 $.ajax({
                     type: "delete",
-                    url: "/admin/contract/" + id,
+                    url: "/admin/salary/detail/" + id,
                     data: {
                         _token: $('[name="_token"]').val(),
                     },
@@ -167,7 +182,7 @@
                             });
 
                             setTimeout(function () {
-                                window.location.href = "/admin/contract/";
+                                window.location.href = "/admin/salary/detail/";
                             }, 1000);
                         }
                         if (response.is === "unsuccess") {
