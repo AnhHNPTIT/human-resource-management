@@ -26,6 +26,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckAdminLogin'], function 
 	Route::get('/new/file', 'FileController@create');
 	Route::delete('/file/{id}', 'FileController@destroy');
 
+	// work
+	Route::get('/work', 'WorkController@worksIndex');
+	Route::post('/work', 'WorkController@store');
+	Route::post('/work/{id}', 'WorkController@update');
+	Route::get('/work/{id}', 'WorkController@show');
+	Route::get('/new/work', 'WorkController@create');
+	Route::delete('/work/{id}', 'WorkController@destroy');
+
+
 	// salary detail
 	Route::get('/salary/detail', 'SalaryDetailController@indexSalaryDetail');
 	Route::post('/salary/detail', 'SalaryDetailController@store');

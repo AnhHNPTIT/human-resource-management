@@ -86,6 +86,9 @@ class UserController extends Controller
         if ($data['tenDN']) {
             $updateData['tenDN'] = $data['tenDN'];
         }
+        if ($data['maNV']) {
+            $updateData['maNV'] = $data['maNV'];
+        }
         if ($data['loaiTK']) {
             $updateData['loaiTK'] = $data['loaiTK'];
         }

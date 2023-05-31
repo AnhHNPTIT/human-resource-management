@@ -1,4 +1,4 @@
-@extends('layouts.master_admin') @section('controll') Accounts List @endsection
+@extends('layouts.master_admin') @section('controll') works List @endsection
 @section('content')
 <!-- Main content -->
 <section class="content">
@@ -6,61 +6,56 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Danh sách người dùng</h3>
+                    <h3 class="box-title">Danh sách lịch trình công tác</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     @csrf
                     <div style="margin-bottom: 30px">
                         <a
-                            href="/admin/new/account"
+                            href="/admin/new/work"
                             data-toggle="modal"
                             class="btn btn-info btn-add"
-                            >Thêm tài khoản</a
+                            >Thêm lịch trình công tác</a
                         >
                     </div>
                     <table
-                        id="list-accounts"
+                        id="list-works"
                         class="table table-bordered table-striped"
                         style="margin-top: 10px"
                     >
                         <thead>
                             <tr>
-                                <th class="col-sm-3 text-center">
-                                    Tên đăng nhập
-                                </th>
-                                <th class="col-sm-3 text-center">
-                                    Loại tài khoản
-                                </th>
-                                <th class="col-sm-3 text-center">Tham gia</th>
-                                <th class="col-sm-3 text-center">Hành động</th>
+                                <th class="col-sm-2 text-center">Nhân viên</th>
+                                <th class="col-sm-2 text-center">Chức vụ</th>
+                                <th class="col-sm-2 text-center">Phòng ban</th>
+                                <th class="col-sm-2 text-center">Ngày đến công tác</th>
+                                <th class="col-sm-2 text-center">Ngày chuyển công tác</th>
+                                <th class="col-sm-2 text-center">Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @php Carbon\Carbon::setLocale('vi'); @endphp
-                            @foreach ($accounts as $value)
+                            @foreach ($works as $value)
                             <tr>
-                                <td class="col-sm-3 text-center">
-                                    {{$value->tenDN}}
+                                <td class="col-sm-2 text-center">
+                                    {{$value->account->hoTen}}
                                 </td>
-                                <td class="col-sm-3 text-center">
-                                    @if($value->loaiTK == "NV_NHANSU")
-                                        <p>Nhân viên nhân sự</p>
-                                    @elseif($value->loaiTK == "NV")
-                                        <p>Nhân viên</p>
-                                    @elseif($value->loaiTK == "NV_KETOAN")
-                                        <p>Nhân viên kế toán</p>
-                                    @elseif($value->loaiTK == "GIAMDOC")
-                                        <p>Giám đốc</p>
-                                    @endif
+                                <td class="col-sm-2 text-center">
+                                    {{$value->department->tenPB}}
                                 </td>
-                                <td class="col-sm-3 text-center">
-                                    {{Carbon\Carbon::parse($value->created_at)->diffForHumans()}}
+                                <td class="col-sm-2 text-center">
+                                    {{$value->position->chucVu}}
+                                </td>
+                                <td class="col-sm-2 text-center">
+                                    {{$value->ngayDenCT}}
+                                </td>
+                                <td class="col-sm-2 text-center">
+                                    {{$value->ngayChuyenCT}}
                                 </td>
 
-                                <td class="col-sm-3 text-center">
+                                <td class="col-sm-2 text-center">
                                     <a
-                                        href="/admin/account/{{$value->id}}"
+                                        href="/admin/work/{{$value->id}}"
                                         type="button"
                                         class="btn btn-warning btn-edit"
                                     >
@@ -70,7 +65,7 @@
                                         data-id="{{$value->id}}"
                                         type="button"
                                         title="Xóa"
-                                        class="btn btn-danger btn-delete-account"
+                                        class="btn btn-danger btn-delete-work"
                                     >
                                         <i class="fa fa-user-times"></i>
                                     </button>
@@ -80,7 +75,7 @@
                         </tbody>
                     </table>
 
-                    {{-- {{$accounts->links()}} --}}
+                    {{-- {{$works->links()}} --}}
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -92,7 +87,7 @@
 
     <script>
         $(document).ready(function () {
-            $("#list-accounts").DataTable({
+            $("#list-works").DataTable({
                 lengthMenu: [
                     [25, 50, 100, 500, 1000, 5000, -1],
                     [25, 50, 100, 500, 1000, 5000, "All"],
@@ -108,7 +103,7 @@
             var id = $(this).attr("data-id");
             $.ajax({
                 type: "put",
-                url: "/admin/account/" + id,
+                url: "/admin/work/" + id,
                 data: {
                     _token: $('[name="_token"]').val(),
                     id: id,
@@ -125,7 +120,7 @@
                         });
 
                         setTimeout(function () {
-                            window.location.href = "/admin/account/";
+                            window.location.href = "/admin/work/";
                         }, 1000);
                     }
                     if (response.is === "unsuccess") {
@@ -143,13 +138,13 @@
         });
 
         // delete
-        $(".btn-delete-account").click(function () {
+        $(".btn-delete-work").click(function () {
             if (confirm("Bạn có muốn xóa không?")) {
                 var _this = $(this);
                 var id = $(this).attr("data-id");
                 $.ajax({
                     type: "delete",
-                    url: "/admin/account/" + id,
+                    url: "/admin/work/" + id,
                     data: {
                         _token: $('[name="_token"]').val(),
                     },
@@ -167,7 +162,7 @@
                             });
 
                             setTimeout(function () {
-                                window.location.href = "/admin/account/";
+                                window.location.href = "/admin/work/";
                             }, 1000);
                         }
                         if (response.is === "unsuccess") {

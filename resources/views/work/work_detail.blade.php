@@ -1,5 +1,5 @@
-@extends('layouts.master_admin') @section('controll') New account @endsection
-@section('content')
+@extends('layouts.master_admin') @section('controll') Contract detail
+@endsection @section('content')
 
 <div class="container box box-body pad">
     <div class="row">
@@ -12,95 +12,110 @@
                 <ul></ul>
             </div>
 
-            <div
-                class="alert alert-warning unsuccess-msg"
-                style="display: none"
-            >
+            <div class="alert alert-warning unsuccess-msg" style="display: none">
                 <ul></ul>
             </div>
         </div>
 
+        @if(isset($work))
         <div class="col-xs-12">
             <div class="box-header">
-                <h3 class="box-title">Tạo tài khoản</h3>
+                <h3 class="box-title">Cập nhật lịch trình</h3>
             </div>
-            <!-- /.box-header -->
             <div class="box-body">
                 @csrf
                 <div class="form-group">
+                    <input type="hidden" class="form-control" id="getWorkId" value="{{ $work->id }}"><br>
                     <label for="maNV" style="margin-top: 10px">Nhân viên</label>
                     <select name="maNV" class="form-control" id="maNV">
                         @foreach ($files as $value)
-                        <option value="{{$value->id}}">{{$value->hoTen}} - Mã NV {{$value->id}}</option>
+                        <option value="{{$value->id}}" {{ $work->maNV==$value->id ? "selected" : "" }}>{{$value->hoTen}} - Mã NV {{$value->id}}</option>
                         @endforeach
                     </select><br />
 
-                    <label for="tenDN" style="margin-top: 10px">Tên đăng nhập</label>
-                    <input
-                        name="tenDN"
-                        type="text"
-                        class="form-control"
-                        id="tenDN"
-                        placeholder="Ví dụ : Phan Khánh Hưng"
-                    /><br />
+                    <label for="maPB" style="margin-top: 10px">Phòng ban</label>
+                    <select name="maPB" class="form-control" id="maPB">
+                        @foreach ($departments as $value)
+                        <option value="{{$value->id}}" {{ $work->maPB==$value->id ? "selected" : "" }}> {{$value->tenPB}} </option>
+                        @endforeach
+                    </select><br />
 
-                    <label for="matKhau" style="margin-top: 10px">Mật khẩu</label>
-                    <input
-                        name="matKhau"
-                        type="password"
-                        class="form-control"
-                        id="matKhau"
-                        placeholder="Mật khẩu"
-                    /><br />
+                    <label for="maCV" style="margin-top: 10px">Chức vụ</label>
+                    <select name="maCV" class="form-control" id="maCV">
+                        @foreach ($positions as $value)
+                        <option value="{{$value->id}}" {{ $work->maCV==$value->id ? "selected" : "" }}> {{$value->chucVu}} </option>
+                        @endforeach
+                    </select><br />
 
-                    <label for="loaiTK" style="margin-top: 10px"
-                        >Loại tài khoản</label
-                    >
-                    <select name="loaiTK" class="form-control" id="loaiTK">
-                        <option value="NV_NHANSU">Nhân viên nhân sự</option>
-                        <option value="NV">Nhân viên</option>
-                        <option value="NV_KETOAN">Nhân viên kế toán</option>
-                        <option value="GIAMDOC">Giám đốc</option></select
-                    ><br />
+                    <label for="ngayDenCT" style="margin-top: 10px">Ngày đến công tác</label>
+					<div class="input-group date">
+						<div class="input-group-addon">
+							<i class="fa fa-calendar"></i>
+						</div>
+						<input type="text" class="form-control pull-right" id="ngayDenCT" value="{{$work->ngayDenCT}}">
+					</div>       
 
-                    <div style="margin-top: 10px">
-                        <a href="/admin/account" class="btn btn-danger"
+                    <label for="ngayChuyenCT" style="margin-top: 30px">Ngày chuyển công tác</label>
+					<div class="input-group date">
+						<div class="input-group-addon">
+							<i class="fa fa-calendar"></i>
+						</div>
+						<input type="text" class="form-control pull-right" id="ngayChuyenCT" value="{{$work->ngayChuyenCT}}">
+					</div>           
+
+                    <div style="margin-top: 20px">
+                        <a href="/admin/work" class="btn btn-danger"
                             >Hủy bỏ</a
                         >
                         <button
                             type="button"
-                            class="btn btn-success btn-register-account"
+                            class="btn btn-success btn-update-work"
                         >
-                            Tạo
+                            Cập nhật
                         </button>
                     </div>
                 </div>
             </div>
         </div>
+        @endif
     </div>
 </div>
 
 <script type="text/javascript">
     $(function () {
-        //Date picker
-        $("#datepicker").datepicker({
+        $("#ngayDenCT").datepicker({
+            autoclose: true,
+        });
+        $("#ngayChuyenCT").datepicker({
             autoclose: true,
         });
     });
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"
+    integrity="sha512-CryKbMe7sjSCDPl18jtJI5DR5jtkUWxPXWaLCst6QjH8wxDexfRJic2WRmRXmstr2Y8SxDDWuBO6CQC6IE4KTA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script type="text/javascript">
-    $(".btn-register-account").click(function () {
+    function formatDateTime(time) {
+        if (time) {
+            return moment(time).format("YYYY-MM-DD");
+        }
+        return null;
+    }
+    $(".btn-update-work").click(function () {
         var form_data = new FormData();
+        var id = $("#getWorkId").val();
         form_data.append("_token", "{{csrf_token()}}");
+        form_data.append("maPB", $("#maPB").val());
         form_data.append("maNV", $("#maNV").val());
-        form_data.append("tenDN", $("#tenDN").val());
-        form_data.append("loaiTK", $("#loaiTK").val());
-        form_data.append("matKhau", $("#matKhau").val());
+        form_data.append("maCV", $("#maCV").val());
+        form_data.append("ngayDenCT", formatDateTime($("#ngayDenCT").val()));
+        form_data.append("ngayChuyenCT", formatDateTime($("#ngayChuyenCT").val()));
 
         $.ajax({
             type: "post",
-            url: "/admin/account",
+            url: `/admin/work/${id}`,
             data: form_data,
             dataType: "json",
             contentType: false,
@@ -136,7 +151,7 @@
                         .append("<li>" + response.uncomplete + "</li>");
                 }
                 window.scroll({
-                    top: 100,
+                    top: 0,
                     behavior: "smooth",
                 });
             },

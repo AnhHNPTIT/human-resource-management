@@ -243,24 +243,6 @@
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-
-          <!-- <li class="header">MAIN NAVIGATION</li> -->
-          @if(Auth::guard('admin')->check())
-          @if(Auth::guard('admin')->user()->level == 1)
-          <li class="active treeview">
-            <a href="#">
-              <i class="fa fa-sitemap"></i> <span>Quản lý tài khoản</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="/admin/account"><i class="fa fa-user-circle"></i> Người dùng </a></li>
-            </ul>
-          </li>
-          @endif
-          @endif
-
           @if(Auth::guard('admin')->check())
           @if(Auth::guard('admin')->user()->level == 1)
           <li class="active treeview">
@@ -271,7 +253,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="/admin/contract"><i class="fa fa-user-circle"></i> Hợp đồng lao động </a></li>
+              <li><a href="/admin/contract"><i class="fa fa-user-circle"></i> Danh sách hợp đồng </a></li>
             </ul>
           </li>
           @endif
@@ -287,7 +269,23 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="/admin/file"><i class="fa fa-user-circle"></i> Hồ sơ </a></li>
+              <li><a href="/admin/file"><i class="fa fa-user-circle"></i> Danh sách hồ sơ </a></li>
+            </ul>
+          </li>
+          @endif
+          @endif
+
+          @if(Auth::guard('admin')->check())
+          @if(Auth::guard('admin')->user()->level == 1)
+          <li class="active treeview">
+            <a href="#">
+              <i class="fa fa-sitemap"></i> <span>Quản lý tài khoản</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/admin/account"><i class="fa fa-user-circle"></i> Danh sách tài khoản </a></li>
             </ul>
           </li>
           @endif
@@ -304,6 +302,22 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="/admin/salary/detail"><i class="fa fa-user-circle"></i> Bảng lương </a></li>
+            </ul>
+          </li>
+          @endif
+          @endif
+
+          @if(Auth::guard('admin')->check())
+          @if(Auth::guard('admin')->user()->level == 1)
+          <li class="active treeview">
+            <a href="#">
+              <i class="fa fa-university"></i> <span>Quản lý công việc</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/admin/work"><i class="fa fa-building"></i>Quá trình công tác</a></li>
             </ul>
           </li>
           @endif

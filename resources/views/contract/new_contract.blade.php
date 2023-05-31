@@ -33,7 +33,7 @@
                     >
                     <select name="maLHDLD" class="form-control" id="maLHDLD">
                         @foreach ($contract_types as $value)
-                        <option value={{$value->id}}>{{$value->tenLHDLD}}</option>
+                        <option value="{{$value->id}}">{{$value->tenLHDLD}}</option>
                         @endforeach
                     </select><br />
 
@@ -42,7 +42,7 @@
                     >
                     <select name="maCV" class="form-control" id="maCV">
                         @foreach ($positions as $value)
-                        <option value={{$value->id}}>{{$value->chucVu}}</option>
+                        <option value="{{$value->id}}">{{$value->chucVu}}</option>
                         @endforeach
                     </select><br />
 

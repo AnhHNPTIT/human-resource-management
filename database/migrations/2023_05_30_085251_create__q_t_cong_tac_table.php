@@ -21,7 +21,7 @@ class CreateQTCongTacTable extends Migration
             $table->date('ngayDenCT')->nullable();
             $table->date('ngayChuyenCT')->nullable();
             $table->timestamps();
-            $table->foreign('maNV')->references('id')->on('TaiKhoan');
+            $table->foreign('maNV')->references('id')->on('HoSoNV');
             $table->foreign('maCV')->references('id')->on('ChucVu');
             $table->foreign('maPB')->references('id')->on('PhongBan');
         });

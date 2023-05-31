@@ -27,11 +27,10 @@
             <div class="box-body">
                 @csrf
                 <div class="form-group">
-                    <label for="maHDLD" style="margin-top: 10px">Mã hợp đồng lao động</label>
+                    <label for="maHDLD" style="margin-top: 10px">Hợp đồng lao động</label>
                     <select name="maHDLD" class="form-control" id="maHDLD">
-                        <option value="">-----------Chọn hợp đồng-----------</option>
                         @foreach ($contracts as $value)
-                        <option value={{$value->id}}>Mã HD {{$value->id}} - ({{$value->contractType->tenLHDLD}} - {{$value->position->chucVu}})</option>
+                        <option value="{{$value->id}}">Mã HD {{$value->id}} - ({{$value->contractType->tenLHDLD}} - {{$value->position->chucVu}})</option>
                         @endforeach
                     </select><br />
 

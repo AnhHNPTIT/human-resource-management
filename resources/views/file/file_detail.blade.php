@@ -27,7 +27,7 @@
                 @csrf
                 <input type="hidden" class="form-control" id="getFileId" value="{{ $file->id }}" /><br />
                 <div class="form-group">
-                    <label for="maHDLD" style="margin-top: 10px">Mã hợp đồng lao động</label>
+                    <label for="maHDLD" style="margin-top: 10px">Hợp đồng lao động</label>
                     <select name="maHDLD" class="form-control" id="maHDLD">
                         @foreach ($contracts as $value)
                         <option value="{{$value->id}}" {{ $file->maHDLD==$value->id ? "selected" : "" }}>Mã HD {{$value->id}} - ({{$value->contractType->tenLHDLD}}
