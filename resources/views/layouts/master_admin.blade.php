@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Admin | Functional Food Store</title>
+  <title>Admin | Quản lý nhân sự</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -190,7 +190,7 @@
                   <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">@endif
 
                   <p>
-                    Functional Food Store
+                    Quản lý nhân sự
                     <small>{{\Carbon\Carbon::parse(Auth::guard('admin')->user()->created_at)->format('d-m-Y')}}</small>
                   </p>
                 </li>
@@ -333,9 +333,9 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="/admin/chart"><i class="fa fa-pie-chart"></i>Biểu đồ thống kê</a></li>
-              <li><a href="/admin/report_product"><i class="fa fa-star"></i>Báo cáo sản phẩm</a></li>
-              <li><a href="/admin/report-salary"><i class="fa fa-star"></i>Lương theo phòng ban</a></li>
+              <!-- <li><a href="/admin/chart"><i class="fa fa-pie-chart"></i>Biểu đồ thống kê</a></li> -->
+              <li><a href="/admin/report-account-department"><i class="fa fa-user"></i>Nhân viên - phòng ban</a></li>
+              <li><a href="/admin/report-salary-department"><i class="fa fa-money"></i>Lương - phòng ban</a></li>
             </ul>
           </li>
           @endif

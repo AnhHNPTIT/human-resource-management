@@ -10,7 +10,7 @@ Trang chủ
         <!-- BAR CHART -->
         <div class="box box-info">
             <div class="box-header with-btransaction">
-                <h3 class="box-title">Doanh thu</h3>
+                <h3 class="box-title">Tổng chi</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -20,7 +20,7 @@ Trang chủ
             </div>
             <div class="box-body">
                 <div class="chart">
-                <canvas id="barChart" style="height:230px"></canvas>
+                <!-- <canvas id="barChart" style="height:230px"></canvas> -->
                 </div>
             </div>
             <!-- /.box-body -->
@@ -28,77 +28,9 @@ Trang chủ
     </div>
 </div>
 
-<div class="row">
-	<div class="col-md-12 col-sm-12 col-xs-12">
-         <!-- LINE CHART -->
-		 <div class="box box-info">
-            <div class="box-header with-btransaction">
-              <h3 class="box-title">Đăng ký tài khoản</h3>
+<!-- <script src="{{asset('bower_components/chart.js/Chart.js')}}"></script> -->
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <div class="box-body">
-              <div class="chart">
-                <canvas id="lineChart" style="height:250px;"></canvas>
-              </div>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-6 col-sm-6 col-xs-12">
-        <!-- DONUT CHART -->
-        <div class="box box-info">
-        <div class="box-header with-btransaction">
-            <h3 class="box-title">Phân loại sản phẩm</h3>
-
-            <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
-        </div>
-        <div class="box-body">
-            <canvas id="pieChart" style="height:250px; max-heigth:250px; min-heigth:250px;"></canvas>
-        </div>
-        <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-    </div>
-
-	<div class="col-md-6 col-sm-6 col-xs-12">
-		<!-- AREA CHART -->
-		<div class="box box-info">
-		<div class="box-header with-btransaction">
-			<h3 class="box-title">Thống kê đơn hàng thành công</h3>
-
-			<div class="box-tools pull-right">
-			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-			</button>
-			<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-			</div>
-		</div>
-		<div class="box-body">
-			<div class="chart">
-			<canvas id="areaChart" style="height:265px;"></canvas>
-			</div>
-		</div>
-		<!-- /.box-body -->
-		</div>
-		<!-- /.box -->
-	</div>
-</div>
-
-<script src="{{asset('bower_components/chart.js/Chart.js')}}"></script>
-
-<script>
+<!-- <script>
   $(function () {
 	//- AREA CHART -
     //--------------
@@ -360,6 +292,6 @@ Trang chủ
     barChartOptions.datasetFill = false
     barChart.Bar(barChartData, barChartOptions)
   })
-</script>
+</script> -->
 
 @endsection

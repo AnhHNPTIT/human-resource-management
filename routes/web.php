@@ -45,16 +45,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckAdminLogin'], function 
 
 	// report chart
 	Route::get('/chart', 'AdminController@index');
-	Route::get('/report_product', function () {
-		return view('admin.report_product');
-	});
-	Route::get('/report-salary', function () {
+	Route::get('/home', 'AdminController@index');
+	Route::get('/report-account-department', 'ReportController@reportAccount');
+	Route::get('/report-salary-department', function () {
 		return view('admin.report_salary');
 	});
-	// Route::post('/report_product/{id}', 'ProductController@reportProduct');
-	// Route::get('/report_product/{id}', 'ProductController@reportProduct');
-	// Route::post('/report-salary/from_date={from_date}&to_date={to_date}&status={status}', 'TransactionController@reportSalary');
-	Route::get('/report-salary', 'SalaryController@reportSalary');
+	Route::get('/report-salary', 'ReportController@reportSalary');
 });
 
 // admin

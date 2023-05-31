@@ -31,7 +31,7 @@
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-box-body">
-      <p class="login-box-msg" style="font-weight:600; font-size: 18px;">Functional Food Store</p>
+      <p class="login-box-msg" style="font-weight:600; font-size: 18px;">Quản lý nhân sự</p>
 
       <form>
         @csrf

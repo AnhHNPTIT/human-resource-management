@@ -1,7 +1,7 @@
 @extends('layouts.master_admin') 
 
 @section('controll')
-Transactions List
+Salary List
 @endsection
 
 @section('content')
