@@ -8,7 +8,6 @@ class HoSoNV extends Model
 {
     protected $table = 'HoSoNV';
     protected $fillable = [
-        'maNV',
         'hoTen',
         'anhThe',
         'gioiTinh',

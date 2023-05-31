@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddMaNVHoSoNVTable extends Migration
+class AddMaNVTaiKhoanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddMaNVHoSoNVTable extends Migration
      */
     public function up()
     {
-        Schema::table('HoSoNV', function (Blueprint $table) {
-            $table->unsignedInteger('maNV')->after('id');
-            $table->foreign('maNV')->references('id')->on('TaiKhoan');
+        Schema::table('TaiKhoan', function (Blueprint $table) {
+            $table->unsignedInteger('maNV')->nullable()->after('id');
+            $table->foreign('maNV')->references('id')->on('HoSoNV');
         });
     }
 
@@ -26,7 +26,7 @@ class AddMaNVHoSoNVTable extends Migration
      */
     public function down()
     {
-        Schema::table('HoSoNV', function (Blueprint $table) {
+        Schema::table('TaiKhoan', function (Blueprint $table) {
             // 1. Drop foreign key constraints
             $table->dropForeign(['maNV']);
             // 2. Drop the column

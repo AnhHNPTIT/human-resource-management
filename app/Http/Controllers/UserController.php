@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\TaiKhoan;
+use App\HoSoNV;
 use Validator;
 
 class UserController extends Controller
@@ -52,11 +53,18 @@ class UserController extends Controller
         return response()->json(['is' => 'unsuccess', 'uncomplete' => 'Tài khoản chưa được tạo thành công']);
     }
 
+    public function create()
+    {
+        $accounts = TaiKhoan::all();
+        $files =  HoSoNV::all();
+        return view('user.new_account', ['accounts' => $accounts, 'files' => $files]);
+    }
 
     public function show($id)
     {
         $account =  TaiKhoan::find($id);
-        return view('user.account_detail', ['account' => $account]);
+        $files =  HoSoNV::all();
+        return view('user.account_detail', ['account' => $account, 'files' => $files]);
     }
 
     public function destroy($id)
@@ -71,10 +79,17 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $flag = TaiKhoan::find($id)->update([
-            'tenDN' => $data['tenDN'],
-            'loaiTK' => $data['loaiTK']
-        ]);
+        $updateData = [];
+        if ($data['matKhau']) {
+            $updateData['matKhau'] = bcrypt($data['matKhau']);
+        }
+        if ($data['tenDN']) {
+            $updateData['tenDN'] = $data['tenDN'];
+        }
+        if ($data['loaiTK']) {
+            $updateData['loaiTK'] = $data['loaiTK'];
+        }
+        $flag = TaiKhoan::find($id)->update($updateData);
         if ($flag) {
             return response()->json(['is' => 'success', 'complete' => 'Tài khoản cập nhật thành công']);
         }

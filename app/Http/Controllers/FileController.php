@@ -101,7 +101,6 @@ class FileController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'maNV' => 'required',
                 'hoTen' => 'required',
                 'ngaySinh' => 'required',
                 'gioiTinh' => 'required',
@@ -116,7 +115,6 @@ class FileController extends Controller
                 'maBHTN' => 'required',
             ],
             [
-                'maNV.required' => 'Mã nhân viên không được để trống',
                 'hoTen.required' => 'Họ tên không được để trống',
                 'ngaySinh.required' => 'Ngày sinh không được để trống',
                 'gioiTinh.required' => 'Giới tính không được để trống',

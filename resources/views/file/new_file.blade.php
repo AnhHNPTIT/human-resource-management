@@ -35,14 +35,6 @@
                         @endforeach
                     </select><br />
 
-                    <label for="maNV" style="margin-top: 10px">Mã nhân viên</label>
-                    <select name="maNV" class="form-control" id="maNV">
-                        <option value="">-----------Chọn nhân viên-----------</option>
-                        @foreach ($accounts as $value)
-                        <option value={{$value->id}}>Mã NV {{$value->id}} - {{$value->tenDN}}</option>
-                        @endforeach
-                    </select><br />
-
                     <label for="hoTen" style="margin-top: 10px">Họ tên</label>
                     <input
                         name="hoTen"
@@ -189,7 +181,6 @@
     $(".btn-create-file").click(function () {
         var form_data = new FormData();
         form_data.append("_token", "{{csrf_token()}}");
-        form_data.append("maNV", $("#maNV").val());
         form_data.append("hoTen", $("#hoTen").val());
         form_data.append('anhThe', $('input[type=file]')[0].files[0]);
         form_data.append("ngaySinh", formatDateTime($("#ngaySinh").val()));

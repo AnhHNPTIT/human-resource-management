@@ -297,6 +297,22 @@
           @if(Auth::guard('admin')->user()->level == 1)
           <li class="active treeview">
             <a href="#">
+              <i class="fa fa-sitemap"></i> <span>Quản lý bảng lương</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/admin/salary/detail"><i class="fa fa-user-circle"></i> Bảng lương </a></li>
+            </ul>
+          </li>
+          @endif
+          @endif
+
+          @if(Auth::guard('admin')->check())
+          @if(Auth::guard('admin')->user()->level == 1)
+          <li class="active treeview">
+            <a href="#">
               <i class="fa fa-bar-chart"></i> <span>Báo cáo</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -311,7 +327,7 @@
           @endif
           @endif
 
-          <li class="active treeview">
+          <!-- <li class="active treeview"> 
             <a href="#">
               <i class="fa fa-university"></i> <span>Quản lý giao dịch</span>
               <span class="pull-right-container">
@@ -349,7 +365,7 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="/admin/product"> <i class="fa fa-th"></i>Thực phẩm chức năng</a></li>
-              <!-- <li><a href="/admin/new/product"><i class="fa fa-star"></i> Thêm thực phẩm chức năng </a></li> -->
+              <li><a href="/admin/new/product"><i class="fa fa-star"></i> Thêm thực phẩm chức năng </a></li>
             </ul>
           </li>
 
@@ -366,10 +382,9 @@
               <li><a href="/admin/post"><i class="fa fa-newspaper-o"></i> Bài viết</a></li>
             </ul>
           </li>
-
+          -->
         </ul>
       </section>
-      <!-- /.sidebar -->
     </aside>
 
     <!-- Content Wrapper. Contains page content -->

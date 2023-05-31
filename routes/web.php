@@ -5,9 +5,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckAdminLogin'], function 
 	Route::post('/account', 'UserController@store');
 	Route::post('/account/{id}', 'UserController@update');
 	Route::get('/account/{id}', 'UserController@show');
-	Route::get('/new/account', function () {
-		return view('user.new_account');
-	});
+	Route::get('/new/account', 'UserController@create');
 	Route::delete('/account/{id}', 'UserController@destroy');
 
 	// contract
@@ -27,6 +25,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckAdminLogin'], function 
 	Route::get('/file/{id}', 'FileController@show');
 	Route::get('/new/file', 'FileController@create');
 	Route::delete('/file/{id}', 'FileController@destroy');
+
+	// salary detail
+	Route::get('/salary/detail', 'SalaryDetailController@indexSalaryDetail');
+	Route::post('/salary/detail', 'SalaryDetailController@store');
+	Route::post('/salary/detail/{id}', 'SalaryDetailController@update');
+	Route::get('/salary/detail/{id}', 'SalaryDetailController@show');
+	Route::get('/new/salary/detail', 'SalaryDetailController@create');
+	Route::delete('/salary/detail/{id}', 'SalaryDetailController@destroy');
 
 	// transaction
 	Route::delete('/transaction/{id}', 'TransactionController@destroy');

@@ -26,16 +26,25 @@ Account Detail
 		</div>
 		@if(isset($account))
 		<div class="col-xs-12">
+			<div class="box-header">
+				<h3 class="box-title">Cập nhật tài khoản</h3>
+			</div>
 				<div class="box-body">
-					<legend></legend>
 					<div class="form-group">
 						@csrf
 						<input type="hidden" class="form-control" id="getAccountId" value="{{ $account->id }}"><br>
-						
-						<label for="" style="margin-top: 10px;">Tên đăng nhập</label>
-						<input name="name" type="text" class="form-control" id="getTenDN" placeholder="Ví dụ : Phan Khánh Hưng" value="{{$account->tenDN}}"><br>
 
-						<label for="" style="margin-top: 10px;">Loại tài khoản</label>
+						<label for="maNV" style="margin-top: 10px">Nhân viên</label>
+						<select name="maNV" class="form-control" id="getMaNV">
+							@foreach ($files as $value)
+							<option value={{$value->id}} {{ $value->id==$account->maNV ? "selected" : "" }}>{{$value->hoTen}} - Mã NV {{$value->id}}</option>
+							@endforeach
+						</select><br />
+							
+						<label for="tenDN" style="margin-top: 10px;">Tên đăng nhập</label>
+						<input name="tenDN" type="text" class="form-control" id="getTenDN" placeholder="Ví dụ : Phan Khánh Hưng" value="{{$account->tenDN}}"><br>
+
+						<label for="loaiTK" style="margin-top: 10px;">Loại tài khoản</label>
 						<div class="input-box">
 							<select name="loaiTK" id="getLoaiTK" class="form-control pull-right">
 								<option value="NV_NHANSU" {{ $account->loaiTK=='NV_NHANSU' ? "selected" : "" }}>Nhân viên nhân sự</option>
@@ -44,6 +53,15 @@ Account Detail
 								<option value="GIAMDOC"  {{ $account->loaiTK=='GIAMDOC' ? "selected" : "" }}>Giám đốc</option>
 							</select><br>
 						</div><br>
+
+						<label for="matKhau" style="margin-top: 20px">Mật khẩu</label>
+						<input
+							name="matKhau"
+							type="password"
+							class="form-control"
+							id="getMatKhau"
+							placeholder="Mật khẩu"
+						/><br />
 					</div>
 					<button type="button" class="btn btn-primary btn-save">Cập nhật</button>
 				</div>
@@ -55,8 +73,10 @@ Account Detail
 		$('.btn-save').click(function(){
 			var id = $('#getAccountId').val();
 			var form_data = new FormData();
+			form_data.append("maNV", $('#getMaNV').val());
 			form_data.append("tenDN", $('#getTenDN').val());
 			form_data.append("loaiTK", $('#getLoaiTK').val());
+			form_data.append("matKhau", $('#getMatKhau').val());
 			$.ajax({
 				type : 'post',
 				url : `/admin/account/${id}`,
@@ -91,10 +111,10 @@ Account Detail
 						$(".success-msg").css('display','none');
 						$(".unsuccess-msg").find("ul").append('<li>'+response.uncomplete+'</li>');
 					}
-					// window.scroll({
-					// 	top: 100,
-					// 	behavior: 'smooth'
-					// });
+					window.scroll({
+						top: 100,
+						behavior: 'smooth'
+					});
 				}
 			});
 		});

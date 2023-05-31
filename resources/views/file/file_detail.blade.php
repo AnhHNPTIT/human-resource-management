@@ -36,14 +36,6 @@
                         @endforeach
                     </select><br />
 
-                    <label for="maNV" style="margin-top: 10px">Mã nhân viên</label>
-                    <select name="maNV" class="form-control" id="maNV">
-                        @foreach ($accounts as $value)
-                        <option value="{{$value->id}}" {{ $file->maNV==$value->id ? "selected" : "" }}>Mã NV {{$value->id}} - {{$value->tenDN}}
-                        </option>
-                        @endforeach</select
-                    ><br />
-
                     <label for="hoTen" style="margin-top: 10px">Họ tên</label>
                     <input name="hoTen" type="text" class="form-control" id="hoTen" value="{{$file->hoTen}}" /><br />
 
@@ -146,7 +138,6 @@
         var form_data = new FormData();
         var id = $("#getFileId").val();
         form_data.append("_token", "{{csrf_token()}}");
-        form_data.append("maNV", $("#maNV").val());
         form_data.append("hoTen", $("#hoTen").val());
         form_data.append('anhThe', $('input[type=file]')[0].files[0]);
         form_data.append("ngaySinh", formatDateTime($("#ngaySinh").val()));

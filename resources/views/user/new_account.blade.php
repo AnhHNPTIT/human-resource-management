@@ -28,6 +28,13 @@
             <div class="box-body">
                 @csrf
                 <div class="form-group">
+                    <label for="maNV" style="margin-top: 10px">Nhân viên</label>
+                    <select name="maNV" class="form-control" id="maNV">
+                        @foreach ($files as $value)
+                        <option value={{$value->id}}>{{$value->hoTen}} - Mã NV {{$value->id}}</option>
+                        @endforeach
+                    </select><br />
+
                     <label for="tenDN" style="margin-top: 10px">Tên đăng nhập</label>
                     <input
                         name="tenDN"
@@ -86,6 +93,7 @@
     $(".btn-register-account").click(function () {
         var form_data = new FormData();
         form_data.append("_token", "{{csrf_token()}}");
+        form_data.append("maNV", $("#maNV").val());
         form_data.append("tenDN", $("#tenDN").val());
         form_data.append("loaiTK", $("#loaiTK").val());
         form_data.append("matKhau", $("#matKhau").val());
