@@ -63,7 +63,7 @@ class SalaryDetailController extends Controller
             // update report
             $checkExist = BangLuong::where('maPB', $data['maPB'])->where('nam', $data['nam'])->where('thang', $data['thang'])->first();
             if ($checkExist) {
-                BangLuong::find($checkExist->id)->update([
+                ChiTietBangLuong::find($checkExist->id)->update([
                     'tongLCB' => $data['maPB'] + $checkExist['tongLCB'],
                     'tongLTC' => $data['LTC'] + $checkExist['tongLTC'],
                     'tongBHXH' => $data['BHXH'] + $checkExist['tongBHXH'],
@@ -74,7 +74,7 @@ class SalaryDetailController extends Controller
                     'tongLTT' => $data['LTT'] + $checkExist['tongLTT']
                 ]);
             } else {
-                BangLuong::create([
+                ChiTietBangLuong::create([
                     'maPB' => $data['maPB'],
                     'tongLCB' => $data['LCB'],
                     'tongLTC' => $data['LTC'],

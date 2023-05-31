@@ -187,7 +187,7 @@ class TransactionController extends Controller
 		else {
 			$transactions = Transaction::whereDate('created_at', '>=', $request->from_date)->whereDate('created_at', '<=', $request->to_date)->where('status', $request->status)->get();
 		}
-		return view('admin.report_transaction', ['from_date'=> $request->from_date, 'to_date'=> $request->to_date, 'status'=> $request->status, 'transactions' => $transactions]);
+		return view('admin.report_salary', ['from_date'=> $request->from_date, 'to_date'=> $request->to_date, 'status'=> $request->status, 'transactions' => $transactions]);
     }
     
 }

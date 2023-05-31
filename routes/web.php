@@ -43,21 +43,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckAdminLogin'], function 
 	Route::get('/new/salary/detail', 'SalaryDetailController@create');
 	Route::delete('/salary/detail/{id}', 'SalaryDetailController@destroy');
 
-	// transaction
-	Route::delete('/transaction/{id}', 'TransactionController@destroy');
-
 	// report chart
 	Route::get('/chart', 'AdminController@index');
 	Route::get('/report_product', function () {
 		return view('admin.report_product');
 	});
-	Route::get('/report_transaction', function () {
-		return view('admin.report_transaction');
+	Route::get('/report-salary', function () {
+		return view('admin.report_salary');
 	});
-	Route::post('/report_product/{id}', 'ProductController@reportProduct');
-	Route::get('/report_product/{id}', 'ProductController@reportProduct');
-	Route::post('/report_transaction/from_date={from_date}&to_date={to_date}&status={status}', 'TransactionController@reportTransaction');
-	Route::get('/report_transaction/from_date={from_date}&to_date={to_date}&status={status}', 'TransactionController@reportTransaction');
+	// Route::post('/report_product/{id}', 'ProductController@reportProduct');
+	// Route::get('/report_product/{id}', 'ProductController@reportProduct');
+	// Route::post('/report-salary/from_date={from_date}&to_date={to_date}&status={status}', 'TransactionController@reportSalary');
+	Route::get('/report-salary', 'SalaryController@reportSalary');
 });
 
 // admin

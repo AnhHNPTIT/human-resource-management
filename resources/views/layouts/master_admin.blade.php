@@ -335,68 +335,11 @@
             <ul class="treeview-menu">
               <li><a href="/admin/chart"><i class="fa fa-pie-chart"></i>Biểu đồ thống kê</a></li>
               <li><a href="/admin/report_product"><i class="fa fa-star"></i>Báo cáo sản phẩm</a></li>
-              <li><a href="/admin/report_transaction"><i class="fa fa-star"></i>Báo cáo giao dịch</a></li>
+              <li><a href="/admin/report-salary"><i class="fa fa-star"></i>Lương theo phòng ban</a></li>
             </ul>
           </li>
           @endif
           @endif
-
-          <!-- <li class="active treeview"> 
-            <a href="#">
-              <i class="fa fa-university"></i> <span>Quản lý giao dịch</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="/admin/transaction"><i class="fa fa-building"></i>Toàn bộ giao dịch</a></li>
-              <li><a href="/admin/transaction_pending"><i class="fa fa-hospital-o"></i>Giao dịch đang chờ</a></li>
-              <li><a href="/admin/transaction_shipped"><i class="glyphicon glyphicon-gift"></i>Giao dịch đang giao</a></li>
-              <li><a href="/admin/transaction_delivered"><i class="glyphicon glyphicon-ok-circle"></i>Giao dịch đã giao</a></li>
-              <li><a href="/admin/transaction_cancel"><i class="glyphicon glyphicon-remove-circle"></i>Giao dịch đã hủy</a></li>
-            </ul>
-          </li>
-
-          <li class="active treeview">
-            <a href="#">
-              <i class="fa fa-university"></i> <span>Nhóm thông tin</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="/admin/manufacturer"><i class="fa fa-building"></i>Nhà sản xuất</a></li>
-              <li><a href="/admin/unit"><i class="fa fa-calculator"></i>Đơn vị tính</a></li>
-            </ul>
-          </li>
-
-          <li class="active treeview">
-            <a href="#">
-              <i class="fa fa-th-large"></i> <span>Thực phẩm chức năng</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="/admin/product"> <i class="fa fa-th"></i>Thực phẩm chức năng</a></li>
-              <li><a href="/admin/new/product"><i class="fa fa-star"></i> Thêm thực phẩm chức năng </a></li>
-            </ul>
-          </li>
-
-          <li class="active treeview">
-            <a href="{{ url('/ban-tin-suc-khoe') }}">
-              <i class="fa fa-laptop"></i> <span>Bản tin sức khỏe</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="/admin/post-category"><i class="fa fa-list-alt"></i> Chủ đề bài viết</a></li>
-              <li><a href="/admin/tag"><i class="glyphicon glyphicon-tags"></i> Thẻ liên quan</a></li>
-              <li><a href="/admin/post"><i class="fa fa-newspaper-o"></i> Bài viết</a></li>
-            </ul>
-          </li>
-          -->
         </ul>
       </section>
     </aside>
