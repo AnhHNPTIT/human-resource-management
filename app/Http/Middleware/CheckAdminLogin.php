@@ -18,7 +18,7 @@ class CheckAdminLogin
     {
         if(Auth::guard('admin')->check()){
             $admin = Auth::guard('admin')->user();
-            if ($admin->level == 1 && $admin->status == 1 )
+            if ($admin)
             {
                 return $next($request);
             }

@@ -175,7 +175,7 @@
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 @if(Auth::guard('admin')->check())
-                <img src="{{asset('images/admins/'.Auth::guard('admin')->user()->avatar)}}" class="user-image" alt="User Image">
+                <img src="{{asset('images/admins/157202302220191026000342g6LFGCz0rHPe8DIkAnwD4QBmgw1UFu4LQn1JAPoK.jpeg')}}" class="user-image" alt="User Image">
                 @else
                 <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-image" alt="User Image">@endif
 
@@ -185,7 +185,7 @@
                 <!-- User image -->
                 <li class="user-header">
                   @if(Auth::guard('admin')->check())
-                  <img src="{{asset('images/admins/'.Auth::guard('admin')->user()->avatar)}}" class="img-circle" alt="User Image">
+                  <img src="{{asset('images/admins/157202302220191026000342g6LFGCz0rHPe8DIkAnwD4QBmgw1UFu4LQn1JAPoK.jpeg')}}" class="img-circle" alt="User Image">
                   @else
                   <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">@endif
 
@@ -221,7 +221,7 @@
         <div class="user-panel">
           <div class="pull-left image">
             @if(Auth::guard('admin')->check())
-            <img src="{{asset('images/admins/'.Auth::guard('admin')->user()->avatar)}}" class="img-circle" alt="User Image">
+            <img src="{{asset('images/admins/157202302220191026000342g6LFGCz0rHPe8DIkAnwD4QBmgw1UFu4LQn1JAPoK.jpeg')}}" class="img-circle" alt="User Image">
             @else
             <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">@endif
           </div>
@@ -244,7 +244,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
           @if(Auth::guard('admin')->check())
-          @if(Auth::guard('admin')->user()->level == 1)
+          @if(in_array(Auth::guard('admin')->user()->loaiTK , ["NV_NHANSU", "NV"]))
           <li class="active treeview">
             <a href="#">
               <i class="fa fa-sitemap"></i> <span>Quản lý hợp đồng</span>
@@ -260,7 +260,7 @@
           @endif
 
           @if(Auth::guard('admin')->check())
-          @if(Auth::guard('admin')->user()->level == 1)
+          @if(in_array(Auth::guard('admin')->user()->loaiTK , ["NV_NHANSU", "NV"]))
           <li class="active treeview">
             <a href="#">
               <i class="fa fa-sitemap"></i> <span>Quản lý hồ sơ</span>
@@ -276,7 +276,7 @@
           @endif
 
           @if(Auth::guard('admin')->check())
-          @if(Auth::guard('admin')->user()->level == 1)
+          @if(in_array(Auth::guard('admin')->user()->loaiTK , ["NV_NHANSU", "NV"]))
           <li class="active treeview">
             <a href="#">
               <i class="fa fa-sitemap"></i> <span>Quản lý tài khoản</span>
@@ -292,7 +292,7 @@
           @endif
 
           @if(Auth::guard('admin')->check())
-          @if(Auth::guard('admin')->user()->level == 1)
+          @if(in_array(Auth::guard('admin')->user()->loaiTK , ["NV_KETOAN", "NV"]))
           <li class="active treeview">
             <a href="#">
               <i class="fa fa-sitemap"></i> <span>Quản lý bảng lương</span>
@@ -308,7 +308,7 @@
           @endif
 
           @if(Auth::guard('admin')->check())
-          @if(Auth::guard('admin')->user()->level == 1)
+          @if(in_array(Auth::guard('admin')->user()->loaiTK , ["NV_NHANSU", "NV"]))
           <li class="active treeview">
             <a href="#">
               <i class="fa fa-university"></i> <span>Quản lý công việc</span>
@@ -324,7 +324,7 @@
           @endif
 
           @if(Auth::guard('admin')->check())
-          @if(Auth::guard('admin')->user()->level == 1)
+          @if(in_array(Auth::guard('admin')->user()->loaiTK , ["NV_NHANSU", "GIAMDOC", "NV_KETOAN"]))
           <li class="active treeview">
             <a href="#">
               <i class="fa fa-bar-chart"></i> <span>Báo cáo</span>
@@ -334,8 +334,12 @@
             </a>
             <ul class="treeview-menu">
               <!-- <li><a href="/admin/chart"><i class="fa fa-pie-chart"></i>Biểu đồ thống kê</a></li> -->
+              @if(in_array(Auth::guard('admin')->user()->loaiTK , ["NV_NHANSU", "GIAMDOC"]))
               <li><a href="/admin/report-account-department"><i class="fa fa-user"></i>Nhân viên - phòng ban</a></li>
+              @endif
+              @if(in_array(Auth::guard('admin')->user()->loaiTK , ["NV_KETOAN", "GIAMDOC"]))
               <li><a href="/admin/report-salary-department"><i class="fa fa-money"></i>Lương - phòng ban</a></li>
+              @endif
             </ul>
           </li>
           @endif

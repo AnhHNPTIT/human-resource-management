@@ -40,7 +40,6 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
@@ -70,14 +69,9 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Customer::class,
-        ],
-
         'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Admin::class,
+            'model' => App\TaiKhoan::class,
         ],
     ],
 
@@ -97,15 +91,9 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => 60,
-        ],
-        
         'admins' => [
             'provider' => 'admins',
-            'email' => 'auth.emails.password',
+            // 'email' => 'auth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,
         ],

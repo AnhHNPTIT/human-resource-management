@@ -49,11 +49,11 @@
 
 
         <div class="form-group has-feedback">
-          <input type="email" id="email" class="form-control" placeholder="Email" name="email" value="{{ old('email') }}" required autofocus>
+          <input type="text" id="tenDN" class="form-control" placeholder="Tên đăng nhập" name="tenDN" value="{{ old('tenDN') }}" required autofocus>
         </div>
 
         <div class="form-group has-feedback">
-          <input type="password" id="password" class="form-control" placeholder="Password" name="password" required>
+          <input type="password" id="matKhau" class="form-control" placeholder="Mật khẩu" name="matKhau" required>
         </div>
 
         <div class="row">
@@ -83,8 +83,8 @@
         if (keycode == '13') {
           var form_data = new FormData();
           form_data.append("_token", '{{csrf_token()}}');
-          form_data.append("email", $('#email').val());
-          form_data.append("password", $('#password').val());
+          form_data.append("tenDN", $('#tenDN').val());
+          form_data.append("matKhau", $('#matKhau').val());
 
           $.ajax({
             type : 'post',
@@ -137,8 +137,8 @@
     $('.btn-login').click(function(){
       var form_data = new FormData();
       form_data.append("_token", '{{csrf_token()}}');
-      form_data.append("email", $('#email').val());
-      form_data.append("password", $('#password').val());
+      form_data.append("tenDN", $('#tenDN').val());
+      form_data.append("matKhau", $('#matKhau').val());
 
       $.ajax({
         type : 'post',
