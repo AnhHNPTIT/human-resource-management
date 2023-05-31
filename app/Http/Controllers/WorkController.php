@@ -4,18 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\QTCongTac;
-use App\TaiKhoan;
-use App\HopDongLD;
 use App\PhongBan;
 use App\ChucVu;
 use App\HoSoNV;
 use Validator;
+use Auth;
 
 class WorkController extends Controller
 {
     public function worksIndex()
     {
-        $works = QTCongTac::all();
+        if (Auth::guard('admin')->user()->loaiTK == "NV") {
+            $works = QTCongTac::where('maNV', Auth::guard('admin')->user()->maNV)->get();
+        } else {
+            $works = QTCongTac::all();
+        }
         return view('work.works_list', ['works' => $works]);
     }
 

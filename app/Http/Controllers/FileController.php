@@ -7,12 +7,18 @@ use App\HoSoNV;
 use App\TaiKhoan;
 use App\HopDongLD;
 use Validator;
+use Auth;
 
 class FileController extends Controller
 {
     public function filesIndex()
     {
-        $files = HoSoNV::all();
+        if(Auth::guard('admin')->user()->loaiTK == "NV"){
+            $files = HoSoNV::where('id', Auth::guard('admin')->user()->maNV)->get();
+        }
+        else{
+            $files = HoSoNV::all();
+        }
         return view('file.files_list', ['files' => $files]);
     }
 

@@ -12,12 +12,14 @@
                 <div class="box-body">
                     @csrf
                     <div style="margin-bottom: 30px">
+                        @if(Auth::guard('admin')->user()->loaiTK != "NV")
                         <a
                             href="/admin/new/salary/detail"
                             data-toggle="modal"
                             class="btn btn-info btn-add"
                             >Thêm bảng lương</a
                         >
+                        @endif
                     </div>
                     <table
                         id="list-salary-details"
@@ -74,6 +76,7 @@
                                     {{$value->ghiChu}}
                                 </td>
                                 <td class="col-sm-1 text-center">
+                                    @if(Auth::guard('admin')->user()->loaiTK != "NV")
                                     <a
                                         href="/admin/salary/detail/{{$value->id}}"
                                         type="button"
@@ -89,6 +92,7 @@
                                     >
                                         <i class="fa fa-user-times"></i>
                                     </button>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

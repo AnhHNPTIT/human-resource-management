@@ -7,13 +7,18 @@ use Illuminate\Support\Facades\DB;
 use App\TaiKhoan;
 use App\HoSoNV;
 use Validator;
+use Auth;
 
 class UserController extends Controller
 {
     public function account()
     {
-        $accounts = DB::table('TaiKhoan')->orderBy('created_at', 'desc');
-        return view('user.accounts_list', ['accounts' => $accounts->paginate()]);
+        if (Auth::guard('admin')->user()->loaiTK == "NV") {
+            $accounts = TaiKhoan::where('maNV', Auth::guard('admin')->user()->maNV)->get();
+        } else {
+            $accounts = DB::table('TaiKhoan')->orderBy('created_at', 'desc');
+        }
+        return view('user.accounts_list', ['accounts' => $accounts]);
     }
 
     public function store(Request $request)

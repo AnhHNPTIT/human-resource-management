@@ -12,12 +12,14 @@
                 <div class="box-body">
                     @csrf
                     <div style="margin-bottom: 30px">
+                        @if(Auth::guard('admin')->user()->loaiTK != "NV")
                         <a
                             href="/admin/new/contract"
                             data-toggle="modal"
                             class="btn btn-info btn-add"
                             >Thêm hợp đồng</a
                         >
+                        @endif
                     </div>
                     <table
                         id="list-contracts"
@@ -59,6 +61,7 @@
                                 </td>
 
                                 <td class="col-sm-2 text-center">
+                                    @if(Auth::guard('admin')->user()->loaiTK != "NV")
                                     <a
                                         href="/admin/contract/{{$value->id}}"
                                         type="button"
@@ -74,6 +77,7 @@
                                     >
                                         <i class="fa fa-user-times"></i>
                                     </button>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

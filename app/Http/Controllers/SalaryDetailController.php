@@ -8,12 +8,17 @@ use App\HoSoNV;
 use App\QTCongTac;
 use App\BangLuong;
 use Validator;
+use Auth;
 
 class SalaryDetailController extends Controller
 {
     public function indexSalaryDetail()
     {
-        $salaryDetails = ChiTietBangLuong::all();
+        if (Auth::guard('admin')->user()->loaiTK == "NV") {
+            $salaryDetails = ChiTietBangLuong::where('maNV', Auth::guard('admin')->user()->maNV)->get();
+        } else {
+            $salaryDetails = ChiTietBangLuong::all();
+        }
         return view('salary_detail.salary_list', ['salaryDetails' => $salaryDetails]);
     }
 
@@ -57,7 +62,7 @@ class SalaryDetailController extends Controller
         $work = QTCongTac::where('maNV', $data['maNV'])
             ->where('ngayDenCT', '<=', \Carbon\Carbon::today())
             ->where('ngayChuyenCT', '>=', \Carbon\Carbon::today())->first();
-        
+
         if ($work) {
             $data['maPB'] = $work['maPB'];
             // update report

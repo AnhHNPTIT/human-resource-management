@@ -12,12 +12,14 @@
                 <div class="box-body">
                     @csrf
                     <div style="margin-bottom: 30px">
+                        @if(Auth::guard('admin')->user()->loaiTK != "NV")
                         <a
                             href="/admin/new/account"
                             data-toggle="modal"
                             class="btn btn-info btn-add"
                             >Thêm tài khoản</a
                         >
+                        @endif
                     </div>
                     <table
                         id="list-accounts"
@@ -66,6 +68,7 @@
                                     >
                                         <i class="glyphicon glyphicon-edit"></i>
                                     </a>
+                                    @if(Auth::guard('admin')->user()->loaiTK != "NV")
                                     <button
                                         data-id="{{$value->id}}"
                                         type="button"
@@ -74,6 +77,7 @@
                                     >
                                         <i class="fa fa-user-times"></i>
                                     </button>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

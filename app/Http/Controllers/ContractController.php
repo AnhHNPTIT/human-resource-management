@@ -4,13 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\HopDongLD;
+use App\HoSoNV;
 use Validator;
+use Auth;
 
 class ContractController extends Controller
 {
     public function contract()
     {
-        $contracts = HopDongLD::all();
+        if(Auth::guard('admin')->user()->loaiTK == "NV"){
+            $account = HoSoNV::find(Auth::guard('admin')->user()->maNV);
+            $contracts = [];
+            if($account){
+                $contracts = HopDongLD::where('id', $account->maHDLD)->get();
+            }
+        }
+        else{
+            $contracts = HopDongLD::all();
+        }
         return view('contract.contracts_list', ['contracts' => $contracts]);
     }
 
