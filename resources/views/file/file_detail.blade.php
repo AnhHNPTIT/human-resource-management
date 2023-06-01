@@ -139,7 +139,7 @@
         var id = $("#getFileId").val();
         form_data.append("_token", "{{csrf_token()}}");
         form_data.append("hoTen", $("#hoTen").val());
-        form_data.append('anhThe', $('input[type=file]')[0].files[0]);
+        $('input[type=file]')[0].files[0] && form_data.append('anhThe', $('input[type=file]')[0].files[0]);
         form_data.append("ngaySinh", formatDateTime($("#ngaySinh").val()));
         form_data.append("gioiTinh", $("#gioiTinh").val());
         form_data.append("diaChi", $("#diaChi").val());

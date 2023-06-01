@@ -141,7 +141,8 @@ class FileController extends Controller
 
         $data = $request->all();
         unset($data['_token']);
-        if ($files = $request->file('anhThe')) {
+        $files = $request->file('anhThe');
+        if ($files) {
             $destinationPath = 'images/'; // upload path
             $time = time();
             $fileName = $time . "" . date('YmdHis') . "" . $files->hashName();
