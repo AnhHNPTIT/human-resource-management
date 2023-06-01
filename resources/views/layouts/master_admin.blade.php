@@ -50,7 +50,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini" style="color: #1b74e7;"><b>P</b>K</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><img style="max-height: 52px;" src="{{asset('images/icons/logo-store.png')}}" class="img-fluid"></span>
+        <span class="logo-lg"><img style="max-height: 52px;" src="{{asset('images/icons/logo.png')}}" class="img-fluid"></span>
       </a>
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
@@ -364,7 +364,7 @@
       <div class="pull-right hidden-xs">
         <b>Version</b> 2.8.0
       </div>
-      <strong>Copyright &copy; 2019-2022 <a href="">CongN</a>.</strong> All rights
+      <strong>Copyright &copy; 2023 <a href="">Mai Hương</a>.</strong> All rights
       reserved.
     </footer>
 

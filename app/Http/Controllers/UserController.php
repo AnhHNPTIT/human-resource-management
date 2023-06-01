@@ -16,7 +16,7 @@ class UserController extends Controller
         if (Auth::guard('admin')->user()->loaiTK == "NV") {
             $accounts = TaiKhoan::where('maNV', Auth::guard('admin')->user()->maNV)->get();
         } else {
-            $accounts = DB::table('TaiKhoan')->orderBy('created_at', 'desc');
+            $accounts = DB::table('TaiKhoan')->orderBy('created_at', 'desc')->get();
         }
         return view('user.accounts_list', ['accounts' => $accounts]);
     }
